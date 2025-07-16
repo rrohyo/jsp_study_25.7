@@ -1,22 +1,20 @@
-package koreaIT;
+package koreaIT.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/HomeMain2")
-public class HomeMain2 extends HttpServlet {
+@WebServlet("/home/main")
+public class HomeMainServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html;charset=UTF-8");
-
-		response.getWriter().append("homeMain2!!!!!!!!!!").append(request.getContextPath());
-		response.getWriter().append("<a href=\"http://localhost:8080/yhw_servlet/HomeMainServlet\">home으로 가기</a>");
+		request.getRequestDispatcher("/jsp/home/main.jsp").forward(request, response);
 	}
 
 }
