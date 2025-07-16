@@ -16,7 +16,7 @@ public class HomeMainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		response.getWriter().append("hello").append(request.getContextPath());
-		response.getWriter().append("<a href=\"http://localhost:8080/yhw_servlet/HomeMain2\">main2로 가기</a>");
+		response.getWriter().append("<a href=\"http://localhost:8080/rrohyo_servlet/HomeMain2\">main2로 가기</a>");
 	}
 
 }
