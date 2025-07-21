@@ -20,14 +20,14 @@ public class ArticleDoWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 
 		Connection conn = null;
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/jdbc_db?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul";
+			String url = "jdbc:mysql://localhost:3306/jdbc_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
 			conn = DriverManager.getConnection(url, "root", "1234");
-			System.out.println("연결 성공!");
 
 			response.getWriter().append("연결성공");
 
@@ -43,11 +43,13 @@ public class ArticleDoWriteServlet extends HttpServlet {
 			sql.append("SET `regDate` = NOW(),");
 			sql.append("`updateDate` = NOW(),");
 			sql.append("`title` = ?,", title);
-			sql.append("`body` = ?;", body);
+			sql.append("`body` = ?", body);
 
 			int id = dbUtil.insert(conn, sql);
+			System.out.println("id : " + id);
 
             response.getWriter().append(String.format("<script>alert('%d번 글이 등록됨');location.replace('list'); </script>", id));
+            System.out.println("스크립트 이후 출력확인");
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패" + e);
@@ -67,7 +69,6 @@ public class ArticleDoWriteServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	

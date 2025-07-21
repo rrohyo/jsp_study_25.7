@@ -27,7 +27,7 @@ public class ArticleListServlet extends HttpServlet {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/jdbc_db?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul";
+			String url = "jdbc:mysql://localhost:3306/jdbc_db?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Seoul";
 			conn = DriverManager.getConnection(url, "root", "1234");
 			System.out.println("연결 성공!");
 			
@@ -39,13 +39,13 @@ public class ArticleListServlet extends HttpServlet {
 			if (request.getParameter("page") != null && request.getParameter("page").length() != 0) {
 				page = Integer.parseInt(request.getParameter("page"));
 			}
-			System.out.println(page);
+			System.out.println("page" + page);
 
 			int itemsInAPage = 10;
 			int limitFrom = (page - 1) * itemsInAPage;
 			
-			System.out.println(itemsInAPage);
-			System.out.println(limitFrom);
+			System.out.println("itemsInAPage" + itemsInAPage);
+			System.out.println("limitFrom" + limitFrom);
 			
             DBUtil dbUtil = new DBUtil(request, response);
             
@@ -60,13 +60,14 @@ public class ArticleListServlet extends HttpServlet {
             sql = new SecSql();
             sql.append("SELECT *");
             sql.append("FROM `article`");
+            sql.append("ORDER BY `id` DESC");
             sql.append("limit ?, ?", limitFrom, itemsInAPage);
             
             List<Map<String, Object>> articleRows = dbUtil.selectRows(conn, sql);
             
             
-            System.out.println(totalCnt);
-			System.out.println(totalPage);
+            System.out.println("totalCnt"+totalCnt);
+			System.out.println("totalPage"+totalPage);
             
             request.setAttribute("articleRows", articleRows); // jsp에 데이터를 넘겨준다.
             request.setAttribute("page", page); 

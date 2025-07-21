@@ -25,7 +25,7 @@ public class ArticleDeleteServletAI extends HttpServlet {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL 8.0 이상 버전 드라이버
-			String url = "jdbc:mysql://localhost:3306/jdbc_db?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul";
+			String url = "jdbc:mysql://localhost:3306/jdbc_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
 			conn = DriverManager.getConnection(url, "root", "1234");
 
 			// id 파라미터 가져오기
