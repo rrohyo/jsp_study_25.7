@@ -73,6 +73,10 @@ table>thead>tr>th, table>tbody>tr>td {
 	</table>
 
 	<style>
+.page {
+	text-align : center;
+	margin-top : 20px;
+}
 .page>a {
 	color: black;
 	text-decoration: none;
@@ -84,17 +88,15 @@ table>thead>tr>th, table>tbody>tr>td {
 }
 </style>
 
-	<!-- <div class="page">
-
+	<div class="page">
 		<%
 		for (int i = 1; i <= totalPage; i++) {
 		%>
 		<a class="<%=cPage == i ? "cPage" : ""%>" href="list?page=<%=i%>"><%=i%></a>
-
 		<%
 		}
 		%>
 	</div>
- -->
+
 </body>
 </html>

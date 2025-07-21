@@ -27,7 +27,7 @@ public class ArticleListServlet extends HttpServlet {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://127.0.0.1:3306/jdbc_db?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul";
+			String url = "jdbc:mysql://localhost:3306/jdbc_db?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul";
 			conn = DriverManager.getConnection(url, "root", "1234");
 			System.out.println("연결 성공!");
 			
@@ -50,15 +50,20 @@ public class ArticleListServlet extends HttpServlet {
             DBUtil dbUtil = new DBUtil(request, response);
             
             SecSql sql = new SecSql();
+            sql.append("SELECT count(*)");
+            sql.append("FROM `article`;");
+            
+            int totalCnt = DBUtil.selectRowIntValue(conn, sql);
+            int totalPage = (int)Math.ceil(totalCnt/(double)itemsInAPage);
+
+            
+            sql = new SecSql();
             sql.append("SELECT *");
             sql.append("FROM `article`");
             sql.append("limit ?, ?", limitFrom, itemsInAPage);
             
             List<Map<String, Object>> articleRows = dbUtil.selectRows(conn, sql);
             
-//            int totalCnt = DBUtil.selectRowIntValue(conn, sql);
-            int totalCnt = 20;
-            int totalPage = (int)Math.ceil(totalCnt/(double)itemsInAPage);
             
             System.out.println(totalCnt);
 			System.out.println(totalPage);
