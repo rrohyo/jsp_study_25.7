@@ -18,7 +18,7 @@ import koreaIT.util.SecSql;
 
 @WebServlet("/member/doLogin")
 public class MemberDoLoginServlet extends HttpServlet {
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=UTF-8");
@@ -29,7 +29,7 @@ public class MemberDoLoginServlet extends HttpServlet {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/jdbc_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-			conn = DriverManager.getConnection(url, "root", "1234");
+			conn = DriverManager.getConnection(url, "root","1234");
 
 			response.getWriter().append("연결성공");
 
@@ -61,7 +61,7 @@ public class MemberDoLoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("loginedMember", memberRow); // 로그인 정보가 세션에 저장됨
-			
+			session.setAttribute("loginedMemberId", (int)memberRow.get("id"));
 			
 			
 			response.getWriter().append(String.format("<script>alert('%s 회원 로그인됨');location.replace('../article/list'); </script>", loginId));
@@ -84,10 +84,10 @@ public class MemberDoLoginServlet extends HttpServlet {
 		}
 		
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
 
 }
