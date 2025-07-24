@@ -29,7 +29,7 @@ public class MemberDoLoginServlet extends HttpServlet {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/jdbc_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-			conn = DriverManager.getConnection(url, "root","1234");
+			conn = DriverManager.getConnection(url, "root", "1234");
 
 			response.getWriter().append("연결성공");
 
@@ -64,7 +64,7 @@ public class MemberDoLoginServlet extends HttpServlet {
 			session.setAttribute("loginedMemberId", (int)memberRow.get("id"));
 			
 			
-			response.getWriter().append(String.format("<script>alert('%s 회원 로그인됨');location.replace('../article/list'); </script>", loginId));
+			response.getWriter().append(String.format("<script>alert('%s 회원 로그인됨');location.replace('../s/home/main'); </script>", loginId));
 			
 
 
